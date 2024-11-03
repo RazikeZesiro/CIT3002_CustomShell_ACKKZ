@@ -24,3 +24,5 @@ ls -l
 
 # Print a completion message
 echo "Script execution completed."
+
+echo "hello "
