@@ -12,11 +12,11 @@ from create_file import create_file  # Function to create a file
 from delete_file import delete_file  # Function to delete a file
 from rename_file import rename_file  # Function to rename a file
 from manage_directory import make_directory, remove_directory, change_directory  # Directory management functions
-from modify_permissions import modify_permissions  # Function to modify file permissions
-from list_attributes import list_attributes  # Function to list file attributes
-from help import display_help  # Function to display help information
-from exit_shell import exit_shell  # Function to exit the shell gracefully
-from error_handling import handle_invalid_command  # Handles invalid command errors
+# from modify_permissions import modify_permissions  # Function to modify file permissions
+# from list_attributes import list_attributes  # Function to list file attributes
+# from help import display_help  # Function to display help information
+# from exit_shell import exit_shell  # Function to exit the shell gracefully
+# from error_handling import handle_invalid_command  # Handles invalid command errors
 
 # Define a style dictionary for the command-line prompt appearance
 style = Style.from_dict(
@@ -83,16 +83,16 @@ def execute_command(args):
             remove_directory(arguments)  # Removes a directory
         elif command == "change":
             change_directory(arguments)  # Changes current working directory
-        elif command == "modify":
-            # Modify requires permissions and filename as separate arguments
-            permissions, file_name = arguments.split(" ", 1)
-            modify_permissions(permissions, file_name)
-        elif command == "list" and arguments == "-l":
-            list_attributes()  # Lists file attributes in long format
-        elif command == "help":
-            display_help()  # Shows help information
-        elif command == "exit":
-            exit_shell()  # Exits the shell
+        # elif command == "modify":
+        #     # Modify requires permissions and filename as separate arguments
+        #     permissions, file_name = arguments.split(" ", 1)
+        #     modify_permissions(permissions, file_name)
+        # elif command == "list" and arguments == "-l":
+        #     list_attributes()  # Lists file attributes in long format
+        # elif command == "help":
+        #     display_help()  # Shows help information
+        # elif command == "exit":
+        #     exit_shell()  # Exits the shell
         else:
             # Handle commands involving pipes and redirection
             handle_redirection_and_piping(" ".join(args))
