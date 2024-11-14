@@ -6,6 +6,8 @@ from prompt_toolkit import PromptSession  # Provides an interactive prompt sessi
 from prompt_toolkit.completion import WordCompleter  # Enables auto-completion of commands
 from prompt_toolkit.styles import Style  # Allows for styling of command-line prompt
 from termcolor import colored  # Enables colored terminal text output
+from modify_permissions import modify_permissions
+from list_attributes import list_attributes
 
 # Import custom functions from additional scripts that handle specific shell commands
 from create_file import create_file  # Function to create a file
@@ -83,16 +85,16 @@ def execute_command(args):
             remove_directory(arguments)  # Removes a directory
         elif command == "change":
             change_directory(arguments)  # Changes current working directory
-        # elif command == "modify":
-        #     # Modify requires permissions and filename as separate arguments
-        #     permissions, file_name = arguments.split(" ", 1)
-        #     modify_permissions(permissions, file_name)
-        # elif command == "list" and arguments == "-l":
-        #     list_attributes()  # Lists file attributes in long format
-        # elif command == "help":
-        #     display_help()  # Shows help information
-        # elif command == "exit":
-        #     exit_shell()  # Exits the shell
+        elif command == "modify":
+             # Modify requires permissions and filename as separate arguments
+            permissions, file_name = arguments.split(" ", 1)
+            modify_permissions(permissions, file_name)
+        elif command == "list" and arguments == "-l":
+            list_attributes()  # Lists file attributes in long format
+        elif command == "help":
+            display_help()  # Shows help information
+        elif command == "exit":
+            exit_shell()  # Exits the shell
         else:
             # Handle commands involving pipes and redirection
             handle_redirection_and_piping(" ".join(args))
