@@ -1,10 +1,17 @@
-# Import the os library for directory operations
+"""
+This script consists of the necessary functions for directory management.
+
+Author: Kaleel Barrett
+Date: 2024-11-12
+"""
+
+# Necessary standard and external libraries
 import os
 
 def make_directory(directory_name):
     """
     Creates a new directory with the specified name.
-    
+
     Parameters:
     directory_name (str): The name of the directory to create.
     """
@@ -14,7 +21,7 @@ def make_directory(directory_name):
 def remove_directory(directory_name):
     """
     Removes a directory if it is empty.
-    
+
     Parameters:
     directory_name (str): The name of the directory to remove.
     """
@@ -29,7 +36,7 @@ def remove_directory(directory_name):
 def change_directory(directory_name):
     """
     Changes the current working directory to the specified directory.
-    
+
     Parameters:
     directory_name (str): The name of the directory to switch to.
     """
