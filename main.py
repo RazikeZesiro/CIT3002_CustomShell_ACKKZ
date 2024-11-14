@@ -7,6 +7,7 @@ from prompt_toolkit.completion import WordCompleter  # Enables auto-completion o
 from prompt_toolkit.styles import Style  # Allows for styling of command-line prompt
 from termcolor import colored  # Enables colored terminal text output
 
+
 # Import custom functions from additional scripts that handle specific shell commands
 from create_file import create_file  # Function to create a file
 from delete_file import delete_file  # Function to delete a file
@@ -14,8 +15,8 @@ from rename_file import rename_file  # Function to rename a file
 from manage_directory import make_directory, remove_directory, change_directory  # Directory management functions
 # from modify_permissions import modify_permissions  # Function to modify file permissions
 # from list_attributes import list_attributes  # Function to list file attributes
-# from help import display_help  # Function to display help information
-# from exit_shell import exit_shell  # Function to exit the shell gracefully
+from help_file import show_help  # Function to display help information
+from exit_file import exit_shell  # Function to exit the shell gracefully
 # from error_handling import handle_invalid_command  # Handles invalid command errors
 
 # Define a style dictionary for the command-line prompt appearance
@@ -89,10 +90,10 @@ def execute_command(args):
         #     modify_permissions(permissions, file_name)
         # elif command == "list" and arguments == "-l":
         #     list_attributes()  # Lists file attributes in long format
-        # elif command == "help":
-        #     display_help()  # Shows help information
-        # elif command == "exit":
-        #     exit_shell()  # Exits the shell
+        elif command == "help":
+           show_help()  # Shows help information
+        elif command == "exit":
+            exit_shell()  # Exits the shell
         else:
             # Handle commands involving pipes and redirection
             handle_redirection_and_piping(" ".join(args))
@@ -178,7 +179,59 @@ def handle_redirection_and_piping(command):
                 if result.stderr:
                     print(colored(result.stderr, "red"))  # Print any errors in red
 
+# help and exit
+class CustomShell:
+    def __init__(self):
+        # Map commands to their functions from the imported modules
+        self.commands = {
+            "help": self.help,
+            "exit": self.exit,
+        }
 
+    def start(self):
+        print(colored("Welcome to the Custom Shell! Type 'help' to see commands.", "green"))
+        while True:
+            user_input = input(colored(">>> ", "blue")).strip()
+            if user_input:
+                self.process_command(user_input)
+
+    def process_command(self, input_text):
+        parts = input_text.split()
+        command = parts[0]
+        args = parts[1:]
+
+        if command in self.commands:
+            try:
+                self.commands[command](args)
+            except Exception as e:
+                print(colored(f"Error executing '{command}': {e}", "red"))
+        else:
+            print(colored(f"Unknown command '{command}'. Type 'help' to list commands.", "yellow"))
+
+    def help(self, args):
+        show_help()  # Call the help function from help.py
+
+    def exit(self, args):
+        exit_shell()  # Call the exit function from exit.py
+
+
+
+
+# #exception added by khaleel 
+def process_command(self, input_text):
+    parts = input_text.split()
+    command = parts[0]
+    args = parts[1:]
+
+    if command in self.commands:
+        try:
+            self.commands[command](args)
+        except Exception as e:
+            print(colored(f"Error executing '{command}': {e}", "red"))
+    else:
+        print(colored(f"Unknown command '{command}'. Type 'help' to list commands.", "yellow"))
+        
+        
 # The main function sets up the shell and runs the interactive loop
 def main():
     session = PromptSession(
