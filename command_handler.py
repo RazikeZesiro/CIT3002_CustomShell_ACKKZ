@@ -56,12 +56,9 @@ def parse_command(command: str):
     if not parts[0].lower() in ("set", "get", "list_env", "unset"):
         for i, part in enumerate(parts):
             if part.startswith("$"):  # Check if the part is an environment variable key
-                try:
-                    parts[i] = get_variable(
-                        part
-                    )  # Replace with the environment variable value
-                except KeyError:
-                    raise ValueError(f"Environment variable '{part}' is not set.")
+                parts[i] = get_variable(
+                    part
+                )  # Replace with the environment variable value
 
     return parts
 

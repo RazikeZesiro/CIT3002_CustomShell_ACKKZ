@@ -41,6 +41,9 @@ def main():
         except EOFError:
             print(colored("\nEOF detected. Exiting shell...", "red"))
             break
+        except Exception as e:
+            # Handles any other exceptions that may occur
+            print(colored(f"Error: {e}", "red"))
 
 
 # Run the main function only if the script is executed directly
